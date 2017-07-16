@@ -19,6 +19,10 @@
         <activity
             android:name=".AddRecordActivity"
             android:label="@string/title_activity_add_record"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddSowActivity"
+            android:label="@string/title_activity_add_sow"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

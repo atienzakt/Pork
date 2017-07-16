@@ -6,13 +6,15 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 import katienza.pork.dao.BreedingRecordDao;
+import katienza.pork.dao.SowDao;
 import katienza.pork.model.BreedingRecord;
+import katienza.pork.model.Sow;
 
 /**
  * Created by katienza on 13/07/2017.
  */
 
-@Database(entities = {BreedingRecord.class}, version = 1)
+@Database(entities = {BreedingRecord.class, Sow.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
@@ -27,5 +29,7 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     public abstract BreedingRecordDao breedingRecordModel();
+
+    public abstract SowDao sowDaoModel();
 
 }

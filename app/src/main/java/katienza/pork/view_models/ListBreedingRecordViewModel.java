@@ -1,4 +1,4 @@
-package katienza.pork;
+package katienza.pork.view_models;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -29,4 +29,6 @@ public class ListBreedingRecordViewModel extends AndroidViewModel {
     public LiveData<List<BreedingRecord>> getBreedingRecordList(){
         return breedingRecordList;
     }
+
+
 }

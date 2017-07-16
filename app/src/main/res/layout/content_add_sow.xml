@@ -5,54 +5,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="katienza.pork.AddRecordActivity"
-    tools:showIn="@layout/activity_add_record">
+    tools:context="katienza.pork.AddSowActivity"
+    tools:showIn="@layout/activity_add_sow">
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/sow_no"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/parity"
+        android:id="@+id/sow_breed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="textPersonName"
+        android:text="Name"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:layout_constraintRight_toRightOf="@+id/sow_no"
+        app:layout_constraintTop_toBottomOf="@+id/sow_no"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/name"
-        android:layout_marginTop="0dp"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintLeft_toLeftOf="@+id/sow_no" />
 
-    <Button
-        android:id="@+id/date"
+    <EditText
+        android:id="@+id/sow_origin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="@+id/parity"
-        android:layout_marginTop="1dp"
-        app:layout_constraintTop_toBottomOf="@+id/parity"
+        app:layout_constraintRight_toRightOf="@+id/sow_breed"
+        app:layout_constraintTop_toBottomOf="@+id/sow_breed"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/parity"
-        app:layout_constraintHorizontal_bias="0.0"
-        android:text="Select Date"/>
+        app:layout_constraintLeft_toLeftOf="@+id/sow_breed" />
 
     <Button
-        android:id="@+id/add_breeding_record"
+        android:id="@+id/select_birth_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="7dp"
+        app:layout_constraintTop_toBottomOf="@+id/sow_origin"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/add_sows"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add"
@@ -60,8 +71,6 @@
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="26dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="280dp" />
-
+        android:layout_marginBottom="18dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 </android.support.constraint.ConstraintLayout>

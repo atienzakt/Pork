@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Pork</string>
     <string name="title_activity_add_record">AddRecordActivity</string>
+    <string name="title_activity_add_sow">AddSowActivity</string>
 </resources>

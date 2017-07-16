@@ -15,14 +15,12 @@ import katienza.pork.model.BreedingRecord;
  * Created by katienza on 13/07/2017.
  */
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
+public class BreedingRecordRecyclerAdapter extends RecyclerView.Adapter<BreedingRecordRecyclerAdapter.RecyclerViewHolder> {
 
     private List<BreedingRecord> breedingRecordList;
-    private View.OnLongClickListener longClickListener;
 
-    public RecyclerViewAdapter(List<BreedingRecord> breedingRecordList, View.OnLongClickListener longClickListener){
+    public BreedingRecordRecyclerAdapter(List<BreedingRecord> breedingRecordList){
         this.breedingRecordList = breedingRecordList;
-        this.longClickListener = longClickListener;
     }
 
     @Override
@@ -35,7 +33,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
         BreedingRecord breedingRecord = breedingRecordList.get(position);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        sdf.format(breedingRecord.getDateBreed());
         holder.date.setText(sdf.format(breedingRecord.getDateBreed()));
         holder.name.setText(breedingRecord.getTestName());
         holder.parity.setText(breedingRecord.getParity()+"");
