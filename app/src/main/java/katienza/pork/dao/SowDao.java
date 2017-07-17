@@ -5,6 +5,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.TypeConverters;
+import android.arch.persistence.room.Update;
 
 import java.util.List;
 
@@ -24,6 +25,6 @@ public interface SowDao {
     @Insert
     void addSow(Sow sow);
 
-    @Query("select * from Sow ")
-    List<Sow> getSowUsingId();
+    @Update
+    void updateSow(Sow sow);
 }

@@ -14,7 +14,7 @@ import katienza.pork.model.Sow;
  * Created by katienza on 13/07/2017.
  */
 
-@Database(entities = {BreedingRecord.class, Sow.class}, version = 2)
+@Database(entities = {BreedingRecord.class, Sow.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;

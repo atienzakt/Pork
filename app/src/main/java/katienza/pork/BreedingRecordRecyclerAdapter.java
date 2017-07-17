@@ -18,9 +18,11 @@ import katienza.pork.model.BreedingRecord;
 public class BreedingRecordRecyclerAdapter extends RecyclerView.Adapter<BreedingRecordRecyclerAdapter.RecyclerViewHolder> {
 
     private List<BreedingRecord> breedingRecordList;
+    private View.OnClickListener onClickListener;
 
-    public BreedingRecordRecyclerAdapter(List<BreedingRecord> breedingRecordList){
+    public BreedingRecordRecyclerAdapter(List<BreedingRecord> breedingRecordList, View.OnClickListener onClickListener){
         this.breedingRecordList = breedingRecordList;
+        this.onClickListener = onClickListener;
     }
 
     @Override
@@ -34,8 +36,10 @@ public class BreedingRecordRecyclerAdapter extends RecyclerView.Adapter<Breeding
         BreedingRecord breedingRecord = breedingRecordList.get(position);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         holder.date.setText(sdf.format(breedingRecord.getDateBreed()));
-        holder.name.setText(breedingRecord.getTestName());
+        holder.name.setText(breedingRecord.getSow().toString());
         holder.parity.setText(breedingRecord.getParity()+"");
+        holder.itemView.setOnClickListener(onClickListener);
+
     }
 
     @Override

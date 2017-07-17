@@ -5,6 +5,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.TypeConverters;
+import android.arch.persistence.room.Update;
 
 import java.util.List;
 
@@ -23,4 +24,7 @@ public interface BreedingRecordDao {
 
     @Insert
     void addRecord(BreedingRecord breedingRecord);
+
+    @Update
+    void updateRecord(BreedingRecord breedingRecord);
 }

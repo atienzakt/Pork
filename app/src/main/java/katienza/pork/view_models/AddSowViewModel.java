@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import katienza.pork.database.AppDatabase;
+import katienza.pork.model.BreedingRecord;
 import katienza.pork.model.Sow;
 
 /**
@@ -35,13 +36,26 @@ public class AddSowViewModel extends AndroidViewModel {
 
         @Override
         protected Void doInBackground(Sow... params) {
-            try {
                 db.sowDaoModel().addSow(params[0]);
-            }
-            catch (Exception e){
-                Log.w("test",e.toString());
-            }
                 return null;
+        }
+    }
+
+    public void updateSow(final Sow sow){
+        new updateSowAsyncTask(appDatabase).execute(sow);
+    }
+
+    private static class updateSowAsyncTask extends AsyncTask<Sow,Void, Void>{
+        private AppDatabase db;
+
+        public updateSowAsyncTask(AppDatabase appDatabase){
+            db=appDatabase;
+        }
+
+        @Override
+        protected Void doInBackground(Sow... params) {
+            db.sowDaoModel().updateSow(params[0]);
+            return null;
         }
     }
 }

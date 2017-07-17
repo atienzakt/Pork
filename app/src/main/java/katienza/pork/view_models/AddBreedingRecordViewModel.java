@@ -37,4 +37,22 @@ public class AddBreedingRecordViewModel extends AndroidViewModel {
             return null;
         }
     }
+
+    public void updateRecord(final BreedingRecord breedingRecord){
+        new updateBreedingRecordAsyncTask(appDatabase).execute(breedingRecord);
+    }
+
+    private static class updateBreedingRecordAsyncTask extends AsyncTask<BreedingRecord,Void, Void>{
+        private AppDatabase db;
+
+        public updateBreedingRecordAsyncTask(AppDatabase appDatabase){
+            db=appDatabase;
+        }
+
+        @Override
+        protected Void doInBackground(BreedingRecord... params) {
+            db.breedingRecordModel().updateRecord(params[0]);
+            return null;
+        }
+    }
 }

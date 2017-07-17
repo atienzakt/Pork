@@ -29,8 +29,5 @@ public class ListSowsViewModel extends AndroidViewModel {
         return sowList;
     }
 
-    public List<Sow> isIDTaken(String id){
-        List<Sow> s = appDatabase.sowDaoModel().getSowUsingId();
-        return s;
-    }
+
 }

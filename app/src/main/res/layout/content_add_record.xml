@@ -9,33 +9,17 @@
     tools:showIn="@layout/activity_add_record">
 
     <EditText
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_constraintTop_creator="1"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="7dp"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
         android:id="@+id/parity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number"
         tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/name"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/name"
-        android:layout_marginTop="0dp"
-        app:layout_constraintHorizontal_bias="0.0" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/date"
@@ -51,6 +35,17 @@
         app:layout_constraintHorizontal_bias="0.0"
         android:text="Select Date"/>
 
+    <Spinner
+        android:id="@+id/select_pig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/parity" />
+
     <Button
         android:id="@+id/add_breeding_record"
         android:layout_width="wrap_content"
@@ -62,6 +57,6 @@
         tools:layout_constraintLeft_creator="1"
         android:layout_marginBottom="26dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="280dp" />
+        android:layout_marginLeft="16dp" />
 
 </android.support.constraint.ConstraintLayout>

@@ -18,9 +18,11 @@ import katienza.pork.model.Sow;
 public class SowRecyclerAdapter extends RecyclerView.Adapter<SowRecyclerAdapter.RecyclerViewHolder> {
 
     private List<Sow> sowList;
+    private View.OnClickListener onClickListener;
 
-    public SowRecyclerAdapter(List<Sow> sowList){
+    public SowRecyclerAdapter(List<Sow> sowList, View.OnClickListener onClickListener){
         this.sowList=sowList;
+        this.onClickListener=onClickListener;
     }
 
     @Override
@@ -36,6 +38,7 @@ public class SowRecyclerAdapter extends RecyclerView.Adapter<SowRecyclerAdapter.
         holder.origin.setText(s.getOrigin());
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         holder.date.setText(sdf.format(s.getBirthDate()));
+        holder.itemView.setOnClickListener(onClickListener);
     }
 
     @Override

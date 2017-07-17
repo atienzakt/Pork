@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,6 +30,8 @@ public class MainActivity extends LifecycleActivity {
     private ListSowsViewModel sowsViewModel;
     private SowRecyclerAdapter sowRecyclerAdapter;
     private RecyclerView sows;
+    private List<Sow> sowList;
+    private List<BreedingRecord> breedingRecordList;
 
 
     @Override
@@ -41,11 +44,25 @@ public class MainActivity extends LifecycleActivity {
         addRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity( new Intent(MainActivity.this,AddRecordActivity.class));
+                Intent i =new Intent(MainActivity.this,AddRecordActivity.class);
+                Bundle b = new Bundle();
+                b.putParcelableArrayList("sowList",new ArrayList<Parcelable>(sowList));
+                i.putExtra("sowList",b);
+                startActivity(i);
             }
         });
         breedingRecords = (RecyclerView) findViewById(R.id.breeding_records);
-        breedingRecordViewAdapter = new BreedingRecordRecyclerAdapter(new ArrayList<BreedingRecord>());
+        breedingRecordViewAdapter = new BreedingRecordRecyclerAdapter(new ArrayList<BreedingRecord>(), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos =breedingRecords.getChildLayoutPosition(v);
+                Intent i =new Intent(MainActivity.this,AddRecordActivity.class);
+                Bundle b = new Bundle();
+                b.putParcelable("editRecord",breedingRecordList.get(pos));
+                i.putExtra("editRecord",b);
+                startActivity(i);
+            }
+        });
         breedingRecords.setLayoutManager( new LinearLayoutManager(this));
         breedingRecords.setAdapter(breedingRecordViewAdapter);
 
@@ -54,6 +71,8 @@ public class MainActivity extends LifecycleActivity {
             @Override
             public void onChanged(@Nullable List<BreedingRecord> breedingRecordList) {
                 breedingRecordViewAdapter.addItems(breedingRecordList);
+                setBreedingRecordList(breedingRecordList);
+
             }
         });
 
@@ -61,11 +80,22 @@ public class MainActivity extends LifecycleActivity {
         addSow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,AddSowActivity.class));
+                Intent i =new Intent(MainActivity.this,AddSowActivity.class);
+                startActivity(i);
             }
         });
         sows = (RecyclerView) findViewById(R.id.sow_record);
-        sowRecyclerAdapter = new SowRecyclerAdapter(new ArrayList<Sow>());
+        sowRecyclerAdapter = new SowRecyclerAdapter(new ArrayList<Sow>(), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               int pos =sows.getChildLayoutPosition(v);
+                Intent i =new Intent(MainActivity.this,AddSowActivity.class);
+                Bundle b = new Bundle();
+                b.putParcelable("editSow",sowList.get(pos));
+                i.putExtra("editSow",b);
+                startActivity(i);
+            }
+        });
         sows.setLayoutManager(new LinearLayoutManager(this));
         sows.setAdapter(sowRecyclerAdapter);
 
@@ -73,11 +103,29 @@ public class MainActivity extends LifecycleActivity {
         sowsViewModel.getSowList().observe(MainActivity.this, new Observer<List<Sow>>() {
             @Override
             public void onChanged(@Nullable List<Sow> sowList) {
+
                 sowRecyclerAdapter.addItems(sowList);
+                setSowList(sowList);
                 for(Sow s:sowList){
                     Log.w("Sows",s.getSowNo()+ " || "+s.getBreed()+ " || "+s.getOrigin()+ " || "+s.getBirthDate());
                 }
             }
         });
+    }
+
+    private List<Sow> getSowList(){
+        return sowList;
+    }
+
+    private void setSowList(List<Sow> sowList){
+        this.sowList=sowList;
+    }
+
+    public List<BreedingRecord> getBreedingRecordList() {
+        return breedingRecordList;
+    }
+
+    public void setBreedingRecordList(List<BreedingRecord> breedingRecordList) {
+        this.breedingRecordList = breedingRecordList;
     }
 }

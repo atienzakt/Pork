@@ -6,13 +6,16 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import katienza.pork.model.Sow;
 import katienza.pork.view_models.AddSowViewModel;
@@ -26,13 +29,18 @@ public class AddSowActivity extends LifecycleActivity {
     private Button add;
     private Button birthDateButton;
     private DatePickerDialog selectBirthDate;
+    //private Spinner sowSpinner;
     private Date birthDate;
     private AddSowViewModel addSowViewModel;
     private ListSowsViewModel listSowsViewModel;
+    private SimpleDateFormat sdf =new SimpleDateFormat("dd-MM-yyyy");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_add_sow);
+
+
         addSowViewModel = ViewModelProviders.of(this).get(AddSowViewModel.class);
         listSowsViewModel = ViewModelProviders.of(this).get(ListSowsViewModel.class);
         sowNo = (EditText) findViewById(R.id.sow_no);
@@ -46,7 +54,6 @@ public class AddSowActivity extends LifecycleActivity {
                 Calendar c = Calendar.getInstance();
                 c.set(year,month,dayOfMonth);
                 birthDate = c.getTime();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 birthDateButton.setText(sdf.format(birthDate));
             }
         }, Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DATE));
@@ -58,14 +65,31 @@ public class AddSowActivity extends LifecycleActivity {
         });
 
 
-
-
+        if(getIntent().getBundleExtra("editSow").getParcelable("editSow")!=null) {
+            Sow s = getIntent().getBundleExtra("editSow").getParcelable("editSow");
+            sowNo.setText(s.getSowNo());
+            breed.setText(s.getBreed());
+            origin.setText(s.getOrigin());
+            Calendar c = Calendar.getInstance();
+            c.setTimeInMillis(s.getBirthDate().getTime());
+            birthDate=s.getBirthDate();
+            selectBirthDate.getDatePicker().updateDate(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH));
+            birthDateButton.setText(sdf.format(birthDate));
+        }
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                try {
+                if(getIntent().getBundleExtra("editSow").getParcelable("editSow")!=null) {
+                    Sow s = getIntent().getBundleExtra("editSow").getParcelable("editSow");
+                    s.setSowNo(sowNo.getText().toString());
+                    s.setBirthDate(birthDate);
+                    s.setBreed(breed.getText().toString());
+                    s.setOrigin(origin.getText().toString());
+                    addSowViewModel.updateSow(s);
+                    finish();
+                }
+                else {
                     Sow s = new Sow(sowNo.getText().toString());
                     s.setBirthDate(birthDate);
                     s.setBreed(breed.getText().toString());
@@ -73,26 +97,6 @@ public class AddSowActivity extends LifecycleActivity {
                     addSowViewModel.addSow(s);
                     finish();
                 }
-                catch(Exception e){
-                    Log.w("SqL",e.toString());
-                }
-
-              // List<Sow> sow = listSowsViewModel.isIDTaken("Name");
-
-//                new AsyncTask<Void, Void, Void>() {
-//                    @Override
-//                    protected Void doInBackground(Void... params) {
-//                        List<Sow> sow = listSowsViewModel.isIDTaken("Name");
-//                        //Log.w("Test",listSowsViewModel.getSowList().getValue()+ " || ");
-//                        //.makeText(getBaseContext(),listSowsViewModel.getSowList().getValue()+ " || ",1).show();
-//                        //Toast.makeText(getBaseContext(),sow+ " || ",1).show();
-//                        Log.w("Test",sow.get(0).getSowNo()+ " || ");
-//                        listSowsViewModel.getSowList().getValue();
-//
-//                        return null;
-//                    }
-//                }.execute();
-
             }
         });
     }
